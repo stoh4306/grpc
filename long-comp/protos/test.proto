@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package test;
+option go_package = "./simultaneous-requests-grpc";
+
+service testService {
+    rpc compute (TestRequest) returns (TestResponse) {}
+    rpc computeStream (TestRequest) returns (stream FrameData) {}
+}
+
+message TestRequest {
+    int32 time = 1;
+}
+
+message TestResponse {
+    int32 sessionId = 1;
+    string message = 2;
+}
+
+message FrameData {
+    int32 id = 1;
+    string message = 2;
+}
